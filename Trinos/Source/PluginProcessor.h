@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "DSP/Waveshaper.h"
 
 //==============================================================================
 /**
@@ -58,6 +59,10 @@ public:
     
     juce::AudioProcessorValueTreeState apvts;
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
+    
+    void updateParameters();
+    
+    Waveshaper waveshaper;
 
 private:
     //==============================================================================
