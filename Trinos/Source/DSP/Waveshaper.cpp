@@ -33,7 +33,7 @@ void Waveshaper::process(juce::AudioBuffer<float>& buffer)
             
             inSample = buffer.getSample(channel, i);
             inSample *=  waveshaperAmount;
-            g
+            
             if (inSample > threshold) {
                 outSample = threshold;
                 buffer.setSample(channel, i, outSample);
