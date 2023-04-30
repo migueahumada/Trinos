@@ -12,6 +12,8 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="xSafIJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <GROUP id="{4EB240AF-10AE-6CB0-B46D-9F4D987AE570}" name="DSP">
+        <FILE id="u5yLO0" name="Gain.cpp" compile="1" resource="0" file="Source/DSP/Gain.cpp"/>
+        <FILE id="SNtTNy" name="Gain.h" compile="0" resource="0" file="Source/DSP/Gain.h"/>
         <FILE id="GsLRW8" name="Waveshaper.cpp" compile="1" resource="0" file="Source/DSP/Waveshaper.cpp"/>
         <FILE id="XL37Xr" name="Waveshaper.h" compile="0" resource="0" file="Source/DSP/Waveshaper.h"/>
       </GROUP>

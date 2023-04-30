@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    Waveshaper.h
-    Created: 29 Apr 2023 12:25:29pm
+    Gain.h
+    Created: 29 Apr 2023 7:32:29pm
     Author:  Miguel Angel Ahumada Gaona
 
   ==============================================================================
@@ -11,17 +11,17 @@
 #pragma once
 #include <JuceHeader.h>
 
-class Waveshaper
+class Gain
 {
 public:
-    Waveshaper();
-    ~Waveshaper();
+    Gain();
+    ~Gain();
     
-    void setWaveshaperGain(float apvtsWaveshaperGain);
-    void setWaveshaperAmount(float apvtsWaveshaperAmount);
+    void setGain(float gainLevel);
     void process(juce::AudioBuffer<float>& buffer);
     
 private:
-    float waveshaperAmount {1.0f};
-    
+    float gainValue {1.0f};
 };
+
+

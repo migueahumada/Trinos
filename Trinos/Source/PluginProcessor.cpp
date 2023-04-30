@@ -32,10 +32,16 @@ TrinosAudioProcessor::~TrinosAudioProcessor()
 
 juce::AudioProcessorValueTreeState::ParameterLayout TrinosAudioProcessor::createParameters()
 {
+//TODO LO RELACIONADO CON LOS APVTS APARECERÁ AQUÍ.
     
     juce::AudioProcessorValueTreeState::ParameterLayout parameters;
     
-    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperAmount",1), "WaveshaperAmount", 0.0f, 2.0f, 1.0f));
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperAmount",1), "WaveshaperAmount", 1.0f, 5.0f, 1.0f));
+    
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("InputGain", 1), "InputGain", 0.0f, 2.0f,1.0f));
+    
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("OutputGain", 1), "OutputGain", 0.0f, 2.0f, 1.0f));
+    
     
     return parameters;
     
@@ -143,12 +149,22 @@ bool TrinosAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) c
 
 void TrinosAudioProcessor::updateParameters()
 {
+    auto inputGainValue = apvts.getRawParameterValue("InputGain") -> load();
+    
     auto waveshaperAmountValue = apvts.getRawParameterValue("WaveshaperAmount") -> load();
+    
+    auto outputGainValue = apvts.getRawParameterValue("OutputGain") -> load();
+    
+    inputGain.setGain(inputGainValue);
+
     waveshaper.setWaveshaperAmount(waveshaperAmountValue);
+    
+    outputGain.setGain(outputGainValue);
 }
 
 void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -157,7 +173,10 @@ void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     
     updateParameters();
     
+    inputGain.process(buffer);
     waveshaper.process(buffer);
+    outputGain.process(buffer);
+
     
 
 
