@@ -23,28 +23,51 @@ void Waveshaper::process(juce::AudioBuffer<float>& buffer)
 
     float inSample = 0.0f;
     float outSample = 0.0f;
+    float threshold = 0.9f;
     float EULER = juce::MathConstants<float>::euler;
+    
+    
     
     for (int channel = 0; channel < buffer.getNumChannels(); channel++) {
         for (int i = 0; i < buffer.getNumSamples(); i++) {
             
             inSample = buffer.getSample(channel, i);
-            
-            if (inSample < 0)
-            {
-                outSample = -1 * inSample* waveshaperAmount;
+            inSample *=  waveshaperAmount;
+            g
+            if (inSample > threshold) {
+                outSample = threshold;
                 buffer.setSample(channel, i, outSample);
-            }else
+                
+            }if(inSample < -threshold)
             {
-                outSample = inSample * waveshaperAmount;
+                outSample = -threshold;
                 buffer.setSample(channel, i, outSample);
             }
             
             
             
             /*
+             ---HARD CLIPPING---
+             if (inSample > threshold) {
+                 outSample = threshold;
+                 buffer.setSample(channel, i, outSample);
+             }if(inSample < -threshold)
+             {
+                 outSample = -threshold;
+                 buffer.setSample(channel, i, outSample);
+             }
+             */
+            
+            /*
+             ---FULL WAVE RECTIFIER---
+            if (inSample < 0)
+            {
+                outSample = -1 * inSample;
+                buffer.setSample(channel, i, outSample);
+            }*/
+            
+            /*
              --EXPONENTIAL--
-            inSample = buffer.getSample(channel, i);
             
             outSample = waveshaperAmount * ((EULER - powf(EULER, 1 - inSample) ) / (EULER - 1));
             
@@ -54,7 +77,7 @@ void Waveshaper::process(juce::AudioBuffer<float>& buffer)
              
             --SOFTCLIPPING--
              
-            inSample = buffer.getSample(channel, i);
+            
             
             outSample = (inSample - (powf(inSample, 3.0f)/3.0f)) * waveshaperAmount;
             
