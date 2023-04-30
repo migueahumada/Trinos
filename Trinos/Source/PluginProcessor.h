@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "DSP/Waveshaper.h"
 #include "DSP/Gain.h"
+#include "DSP/Convolution.h"
 
 //==============================================================================
 /**
@@ -69,6 +70,7 @@ public:
 private:
     Waveshaper waveshaper;
     Gain inputGain, outputGain;
+    Convolution conv;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TrinosAudioProcessor)
 };

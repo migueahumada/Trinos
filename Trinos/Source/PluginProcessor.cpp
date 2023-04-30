@@ -113,8 +113,7 @@ void TrinosAudioProcessor::changeProgramName (int index, const juce::String& new
 //==============================================================================
 void TrinosAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    conv.prepare(sampleRate, samplesPerBlock, getTotalNumInputChannels());
 }
 
 void TrinosAudioProcessor::releaseResources()
@@ -179,6 +178,7 @@ void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     waveshaper.process(buffer);
     outputGain.process(buffer);
 
+    conv.process(buffer);
     
 
 
