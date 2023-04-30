@@ -44,6 +44,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout TrinosAudioProcessor::create
     
     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("OutputGain", 1), "OutputGain", 0.0f, 5.0f, 1.0f));
     
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("MasterDrywet",1), "MasterDrywet", 0.0f, 100.0f, 100.0f));
+    
     
     return parameters;
     
@@ -156,11 +158,15 @@ void TrinosAudioProcessor::updateParameters()
     
     auto outputGainValue = apvts.getRawParameterValue("OutputGain") -> load();
     
+    auto masterDrywetValue = apvts.getRawParameterValue("MasterDrywet") -> load();
+    
     inputGain.setGain(inputGainValue);
 
     waveshaper.setWaveshaperAmount(waveshaperAmountValue);
     
     outputGain.setGain(outputGainValue);
+    
+    masterDrywet.setDrywetValue(masterDrywetValue);
 }
 
 void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -172,13 +178,21 @@ void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+    dryBuffer.makeCopyOf(buffer);
+    
     updateParameters();
     
     inputGain.process(buffer);
-    waveshaper.process(buffer);
-    outputGain.process(buffer);
-
+    
     conv.process(buffer);
+    
+    waveshaper.process(buffer);
+    
+    outputGain.process(buffer);
+    
+    masterDrywet.process(dryBuffer, buffer);
+
+    
     
 
 

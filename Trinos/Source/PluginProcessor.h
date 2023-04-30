@@ -12,6 +12,7 @@
 #include "DSP/Waveshaper.h"
 #include "DSP/Gain.h"
 #include "DSP/Convolution.h"
+#include "DSP/Drywet.h"
 
 //==============================================================================
 /**
@@ -71,6 +72,9 @@ private:
     Waveshaper waveshaper;
     Gain inputGain, outputGain;
     Convolution conv;
+    Drywet masterDrywet;
+    
+    juce::AudioBuffer<float> dryBuffer;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TrinosAudioProcessor)
 };

@@ -18,6 +18,8 @@
       <GROUP id="{4EB240AF-10AE-6CB0-B46D-9F4D987AE570}" name="DSP">
         <FILE id="erE58p" name="Convolution.cpp" compile="1" resource="0" file="Source/DSP/Convolution.cpp"/>
         <FILE id="Ijy60x" name="Convolution.h" compile="0" resource="0" file="Source/DSP/Convolution.h"/>
+        <FILE id="KGgWlN" name="Drywet.cpp" compile="1" resource="0" file="Source/DSP/Drywet.cpp"/>
+        <FILE id="xaLH1Y" name="Drywet.h" compile="0" resource="0" file="Source/DSP/Drywet.h"/>
         <FILE id="u5yLO0" name="Gain.cpp" compile="1" resource="0" file="Source/DSP/Gain.cpp"/>
         <FILE id="SNtTNy" name="Gain.h" compile="0" resource="0" file="Source/DSP/Gain.h"/>
         <FILE id="GsLRW8" name="Waveshaper.cpp" compile="1" resource="0" file="Source/DSP/Waveshaper.cpp"/>
