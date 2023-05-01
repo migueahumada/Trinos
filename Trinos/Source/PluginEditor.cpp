@@ -36,20 +36,29 @@ void TrinosAudioProcessorEditor::prepareSliders()
     masterDrywetSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, false, 0.0f, 0.0f);
     waveshaperAmountSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, false, 0.0f, 0.0f);
     
+//SETEAR TEXTO
     outputGainLabel.setText("Out Gain", juce::sendNotification);
     inputGainLabel.setText("In Gain", juce::sendNotification);
     masterDrywetLabel.setText("Dry/Wet", juce::sendNotification);
     waveshaperAmountLabel.setText("Clip", juce::sendNotification);
-    
+
+    //SETEAR LA JUSTIFACIÓN DEL TEXTO
     outputGainLabel.setJustificationType(juce::Justification::centred);
     inputGainLabel.setJustificationType(juce::Justification::centred);
     masterDrywetLabel.setJustificationType(juce::Justification::centred);
     waveshaperAmountLabel.setJustificationType(juce::Justification::centred);
     
+    //LABEL ES LIGADO AL COMPONENTE
     outputGainLabel.attachToComponent(&outputGainSlider, false);
     inputGainLabel.attachToComponent(&inputGainSlider, false);
     masterDrywetLabel.attachToComponent(&masterDrywetSlider, false);
     waveshaperAmountLabel.attachToComponent(&waveshaperAmountSlider, false);
+    
+    
+    outputGainLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
+    inputGainLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
+    masterDrywetLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
+    waveshaperAmountLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
     
     addAndMakeVisible(outputGainLabel);
     addAndMakeVisible(inputGainLabel);
@@ -74,11 +83,14 @@ void TrinosAudioProcessorEditor::prepareSliders()
 
 void TrinosAudioProcessorEditor::paint (juce::Graphics& g)
 {
+    g.fillAll(juce::Colour(243,198,165));
+    
     // (Our component is opaque, so we must completely fill the background with a solid colour)
+    /*
     g.fillAll (getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 
     g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
+    g.setFont (15.0f);*/
 }
 
 void TrinosAudioProcessorEditor::resized()
