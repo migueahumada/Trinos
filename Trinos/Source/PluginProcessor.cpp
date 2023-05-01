@@ -178,16 +178,14 @@ void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+    //SE HIZO UNA COPIA DEL BUFFER
     dryBuffer.makeCopyOf(buffer);
     
     updateParameters();
     
     inputGain.process(buffer);
-    
     conv.process(buffer);
-    
     waveshaper.process(buffer);
-    
     outputGain.process(buffer);
     
     masterDrywet.process(dryBuffer, buffer);
@@ -206,8 +204,8 @@ bool TrinosAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* TrinosAudioProcessor::createEditor()
 {
-    //return new TrinosAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new TrinosAudioProcessorEditor (*this);
+    //return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
