@@ -12,7 +12,7 @@
 
 Knob_LookAndFeel::Knob_LookAndFeel()
 {
-    knobImage = juce::ImageCache::getFromMemory(BinaryData::KnobTrinos2_png, BinaryData::KnobTrinos2_pngSize);
+    knobImage = juce::ImageCache::getFromMemory(BinaryData::KnobTrinos3_png, BinaryData::KnobTrinos3_pngSize);
 }
 
 Knob_LookAndFeel::~Knob_LookAndFeel(){

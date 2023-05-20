@@ -25,9 +25,9 @@ Waveform::~Waveform()
 void Waveform::paint (juce::Graphics& g)
 {
 
-    g.drawRoundedRectangle(0, 0, getWidth(), getHeight(), 10.0f, 1.0f);
+    g.drawRoundedRectangle(0, 0, getWidth(), getHeight(), 10.0f, 0.0f);
     
-    g.fillAll(juce::Colour(244,226,222));
+    g.fillAll(juce::Colour(239, 247, 255));
     
     auto waveform = audioProcessor.irBuffer;
     
@@ -42,7 +42,7 @@ void Waveform::paint (juce::Graphics& g)
             audioPoints.push_back(buffer[sample]);
         }
         
-        g.setColour(juce::Colours::black);
+        g.setColour(juce::Colour(85, 140, 140));
         p.startNewSubPath(0, getHeight()/2);
         
         for (int sample = 0; sample < audioPoints.size(); ++sample) {
@@ -51,6 +51,7 @@ void Waveform::paint (juce::Graphics& g)
         }
         
         g.strokePath(p, juce::PathStrokeType(2));
+        
         
     }
     else g.drawText("Drag & drop a sample!", 0, 0, getWidth(), getHeight(), juce::Justification::centred);
@@ -61,17 +62,23 @@ void Waveform::resized()
 
 }
 
-bool Waveform::isInterestedInFileDrag(const juce::StringArray &files)
+bool Waveform::isInterestedInFileDrag(const juce::StringArray& files)
 {
-    for (auto file: files) {
-        
-        if (file.contains(".wav") || file.contains(".mp3") || file.contains(".aiff") ) {
+    for (const auto& file : files)
+    {
+        juce::File currentFile(file);
+        const juce::String fileExtension = currentFile.getFileExtension();
+
+        if (fileExtension.equalsIgnoreCase(".wav")
+            || fileExtension.equalsIgnoreCase(".mp3")
+            || fileExtension.equalsIgnoreCase(".aiff")) {
             return true;
         }
-        
     }
+
     return false;
 }
+
 void Waveform::filesDropped (const juce::StringArray& files, int x, int y)
 {
     for (auto file:files)

@@ -62,10 +62,10 @@ void TrinosAudioProcessorEditor::prepareSliders()
     waveshaperAmountLabel.attachToComponent(&waveshaperAmountSlider, false);
     
     
-    outputGainLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
-    inputGainLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
-    masterDrywetLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
-    waveshaperAmountLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
+    outputGainLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colour(239, 247, 255));
+    inputGainLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colour(239, 247, 255));
+    masterDrywetLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colour(239, 247, 255));
+    waveshaperAmountLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colour(239, 247, 255));
     
     inputGainSlider.setLookAndFeel(&lookAndFeel);
     outputGainSlider.setLookAndFeel(&lookAndFeel);
@@ -95,7 +95,7 @@ void TrinosAudioProcessorEditor::prepareSliders()
 
 void TrinosAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colour(0,113,114));
+    g.fillAll(juce::Colour(juce::Colour(35,17,35)));
     
     
     // (Our component is opaque, so we must completely fill the background with a solid colour)
