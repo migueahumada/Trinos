@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "Components/Waveform.h"
+#include "LookAndFeel/knob.h"
 
 //==============================================================================
 /**
@@ -36,6 +37,8 @@ private:
     juce::Label masterDrywetLabel, outputGainLabel, inputGainLabel, waveshaperAmountLabel;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> masterDryWetAttach, outputGainAttach, inputGainAttach, waveshaperAmountAttach;
+    
+    Knob_LookAndFeel lookAndFeel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TrinosAudioProcessorEditor)
 };
