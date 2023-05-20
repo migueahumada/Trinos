@@ -26,6 +26,7 @@ void Waveform::paint (juce::Graphics& g)
 {
 
     g.drawRoundedRectangle(0, 0, getWidth(), getHeight(), 10.0f, 1.0f);
+    
     g.fillAll(juce::Colour(244,226,222));
     
     auto waveform = audioProcessor.irBuffer;
