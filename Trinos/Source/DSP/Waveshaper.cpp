@@ -23,7 +23,7 @@ void Waveshaper::process(juce::AudioBuffer<float>& buffer)
 
     float inSample = 0.0f;
     float outSample = 0.0f;
-    float threshold = 0.9f;
+    float threshold = 0.23f;
     float EULER = juce::MathConstants<float>::euler;
     
     

@@ -37,7 +37,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout TrinosAudioProcessor::create
     juce::AudioProcessorValueTreeState::ParameterLayout parameters;
     
     
-    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("InputGain", 1), "InputGain", 0.0f, 2.0f,1.0f));
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("InputGain", 1), "InputGain", 1.0f, 4.0f,1.0f));
     
     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperAmount",1), "WaveshaperAmount", 1.0f, 7.0f, 1.0f));
 
