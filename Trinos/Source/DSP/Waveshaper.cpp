@@ -24,25 +24,16 @@ void Waveshaper::process(juce::AudioBuffer<float>& buffer)
     float inSample = 0.0f;
     float outSample = 0.0f;
     float threshold = 0.9f;
-    float EULER = juce::MathConstants<float>::euler;
+//    float EULER = juce::MathConstants<float>::euler;
     
     
     
     for (int channel = 0; channel < buffer.getNumChannels(); channel++) {
         for (int i = 0; i < buffer.getNumSamples(); i++) {
             
-            inSample = buffer.getSample(channel, i);
-            inSample *=  waveshaperAmount;
+            outSample = (inSample - (powf(inSample, 3.0f)/3.0f)) * waveshaperAmount;
             
-            if (inSample > threshold) {
-                outSample = threshold;
-                buffer.setSample(channel, i, outSample);
-                
-            }if(inSample < -threshold)
-            {
-                outSample = -threshold;
-                buffer.setSample(channel, i, outSample);
-            }
+            buffer.setSample(channel, i, outSample);
             
             
             

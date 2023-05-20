@@ -39,12 +39,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout TrinosAudioProcessor::create
     
     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("InputGain", 1), "InputGain", 0.0f, 8.0f,1.0f));
     
-    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperAmount",1), "WaveshaperAmount", 0.0f, 1.0f, 0.5f));
-
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("ConvolutionDrywet",1), "ConvolutionDrywet", 0.0f, 100.0f, 100.0f));
     
-    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("OutputGain", 1), "OutputGain", 0.0f, 5.0f, 1.0f));
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperAmount",1), "WaveshaperAmount", 1.0f, 3.0f, 1.0f));
+
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperDrywet",1), "WaveshaperDrywet", 0.0f, 100.0f, 100.0f));
     
     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("MasterDrywet",1), "MasterDrywet", 0.0f, 100.0f, 100.0f));
+    
+    parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("OutputGain", 1), "OutputGain", 0.0f, 5.0f, 1.0f));
     
     
     return parameters;
@@ -164,19 +167,46 @@ void TrinosAudioProcessor::updateParameters()
 {
     auto inputGainValue = apvts.getRawParameterValue("InputGain") -> load();
     
+    auto convolutionDrywetValue= apvts.getRawParameterValue("ConvolutionDrywet") -> load();
+    
     auto waveshaperAmountValue = apvts.getRawParameterValue("WaveshaperAmount") -> load();
+    
+    auto waveshaperDrywetValue= apvts.getRawParameterValue("WaveshaperDrywet") -> load();
+
+    auto masterDrywetValue = apvts.getRawParameterValue("MasterDrywet") -> load();
     
     auto outputGainValue = apvts.getRawParameterValue("OutputGain") -> load();
     
-    auto masterDrywetValue = apvts.getRawParameterValue("MasterDrywet") -> load();
+
+    
+    /*
+     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("InputGain", 1), "InputGain", 0.0f, 8.0f,1.0f));
+     
+     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("ConvolutionDrywet",1), "ConvolutionDrywet", 0.0f, 100.0f, 100.0f));
+     
+     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperAmount",1), "WaveshaperAmount", 1.0f, 3.0f, 1.0f));
+
+     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("WaveshaperDrywet",1), "WaveshaperDrywet", 0.0f, 100.0f, 100.0f));
+     
+     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("MasterDrywet",1), "MasterDrywet", 0.0f, 100.0f, 100.0f));
+     
+     parameters.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID("OutputGain", 1), "OutputGain", 0.0f, 5.0f, 1.0f));
+     
+     */
     
     inputGain.setGain(inputGainValue);
-
+    
+    convolutionDrywet.setDrywetValue(convolutionDrywetValue);
+    
     waveshaper.setWaveshaperAmount(waveshaperAmountValue);
+    
+    waveshaperDrywet.setDrywetValue(waveshaperDrywetValue);
+    
+    masterDrywet.setDrywetValue(masterDrywetValue);
     
     outputGain.setGain(outputGainValue);
     
-    masterDrywet.setDrywetValue(masterDrywetValue);
+
 }
 
 void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -189,16 +219,17 @@ void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
         buffer.clear (i, 0, buffer.getNumSamples());
     
     //SE HIZO UNA COPIA DEL BUFFER
-    dryBuffer.makeCopyOf(buffer);
+    waveshaperDryBuffer.makeCopyOf(buffer);
     
     updateParameters();
     
     inputGain.process(buffer);
-    conv.process(buffer);
+    
     waveshaper.process(buffer);
+    conv.process(buffer);
     outputGain.process(buffer);
     
-    masterDrywet.process(dryBuffer, buffer);
+    masterDrywet.process(waveshaperDryBuffer, buffer);
 
     
     

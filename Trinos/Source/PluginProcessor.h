@@ -74,9 +74,10 @@ private:
     Waveshaper waveshaper;
     Gain inputGain, outputGain;
     Convolution conv;
-    Drywet masterDrywet;
+    Drywet masterDrywet, convolutionDrywet, waveshaperDrywet;
     
-    juce::AudioBuffer<float> dryBuffer;
+    juce::AudioBuffer<float> convolutionDryBuffer;
+    juce::AudioBuffer<float> waveshaperDryBuffer;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TrinosAudioProcessor)
 };

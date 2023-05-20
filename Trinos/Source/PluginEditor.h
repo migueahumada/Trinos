@@ -32,10 +32,11 @@ private:
     
     Waveform waveform {audioProcessor};
     
-    juce::Slider masterDrywetSlider, outputGainSlider, inputGainSlider, waveshaperAmountSlider;
-    juce::Label masterDrywetLabel, outputGainLabel, inputGainLabel, waveshaperAmountLabel;
+    juce::Slider convolutionDrywetSlider,waveshaperDrywetSlider, masterDrywetSlider, outputGainSlider, inputGainSlider, waveshaperAmountSlider;
     
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> masterDryWetAttach, outputGainAttach, inputGainAttach, waveshaperAmountAttach;
+    juce::Label convolutionDrywetLabel, waveshaperDrywetLabel, masterDrywetLabel, outputGainLabel, inputGainLabel, waveshaperAmountLabel;
+    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> convolutionDrywetAttach, waveshaperDrywetAttach, masterDryWetAttach, outputGainAttach, inputGainAttach, waveshaperAmountAttach;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TrinosAudioProcessorEditor)
 };
