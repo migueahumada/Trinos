@@ -9,11 +9,14 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
 //==============================================================================
-TrinosAudioProcessorEditor::TrinosAudioProcessorEditor (TrinosAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+TrinosAudioProcessorEditor::TrinosAudioProcessorEditor (TrinosAudioProcessor& p) : AudioProcessorEditor (&p), audioProcessor (p)
 {
+    
     prepareSliders();
+    
+    addAndMakeVisible(waveform);
     
     setSize (600, 400);
 }
@@ -85,6 +88,7 @@ void TrinosAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colour(243,198,165));
     
+    
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     /*
     g.fillAll (getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
@@ -99,4 +103,6 @@ void TrinosAudioProcessorEditor::resized()
     inputGainSlider.setBoundsRelative(-2.99065e-08, 0.750218f,  0.2f, 0.2f);
     waveshaperAmountSlider.setBoundsRelative(0.416901f, 0.750218f, 0.2f, 0.2f);
     masterDrywetSlider.setBoundsRelative(0.798773f, 0.0933995f, 0.2f, 0.2f);
+    
+    waveform.setBoundsRelative(0.05f, 0.05f, 0.7f, 0.5f);
 }

@@ -19,6 +19,7 @@ public:
     
     void prepare(double inSampleRate, int inSamplePerBlock, int inNumChannels);
     void process(juce::AudioBuffer<float>& buffer);
+    void updateIR(juce::File audiofile);
     
 private:
     juce::dsp::Convolution conv;

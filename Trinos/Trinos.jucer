@@ -11,6 +11,10 @@
       <FILE id="FfFMan" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="xSafIJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <GROUP id="{7883231E-997D-1D0F-3693-C82AD30135DF}" name="Components">
+        <FILE id="kkaRVS" name="Waveform.cpp" compile="1" resource="0" file="Source/Components/Waveform.cpp"/>
+        <FILE id="OCard7" name="Waveform.h" compile="0" resource="0" file="Source/Components/Waveform.h"/>
+      </GROUP>
       <GROUP id="{6BE201F9-6C95-A3D4-7315-AF771A31432D}" name="Assets">
         <FILE id="vjXynP" name="ExampleImpulseResponse.wav" compile="0" resource="1"
               file="Source/Assets/ExampleImpulseResponse.wav"/>

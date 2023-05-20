@@ -38,3 +38,9 @@ void Convolution::process(juce::AudioBuffer<float>& buffer)
     juce::dsp::ProcessContextReplacing<float> context(block);
     conv.process(context);
 }
+
+void Convolution::updateIR(juce::File audioFile)
+{
+    conv.loadImpulseResponse(audioFile, juce::dsp::Convolution::Stereo::yes, juce::dsp::Convolution::Trim::yes
+                             , audioFile.getSize());
+}

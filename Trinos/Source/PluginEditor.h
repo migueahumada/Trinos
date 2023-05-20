@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "Components/Waveform.h"
 
 //==============================================================================
 /**
@@ -26,9 +27,10 @@ public:
     void prepareSliders();
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
+
     TrinosAudioProcessor& audioProcessor;
+    
+    Waveform waveform {audioProcessor};
     
     juce::Slider masterDrywetSlider, outputGainSlider, inputGainSlider, waveshaperAmountSlider;
     juce::Label masterDrywetLabel, outputGainLabel, inputGainLabel, waveshaperAmountLabel;

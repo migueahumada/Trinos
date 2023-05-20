@@ -116,6 +116,16 @@ void TrinosAudioProcessor::changeProgramName (int index, const juce::String& new
 void TrinosAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     conv.prepare(sampleRate, samplesPerBlock, getTotalNumInputChannels());
+    
+    //Read wav from binary data and save samples in buffer.
+    /*juce::MemoryInputStream inputStream(BinaryData::ExampleImpulseResponse_wav, BinaryData::ExampleImpulseResponse_wavSize, false);
+    juce::WavAudioFormat wavFormat;
+    juce::AudioFormatReader* reader = wavFormat.createReaderFor(&inputStream, false);
+    
+    irBuffer.setSize(reader->numChannels, (int)reader->lengthInSamples);
+    reader->read    (&irBuffer, 0, (int)reader->lengthInSamples, 0, true, true);*/
+      
+    
 }
 
 void TrinosAudioProcessor::releaseResources()
@@ -194,6 +204,11 @@ void TrinosAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     
 
 
+}
+
+Convolution& TrinosAudioProcessor::getConv()
+{
+    return conv;
 }
 
 //==============================================================================

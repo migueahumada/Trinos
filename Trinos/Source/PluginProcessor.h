@@ -64,7 +64,9 @@ public:
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
     
     void updateParameters();
+    Convolution& getConv();
     
+    juce::AudioBuffer<float> irBuffer;
     
     
 
